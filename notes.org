@@ -1,0 +1,436 @@
+* Notes
+<2022-10-20 Thu 12:57>: These are the two commands I used to start this particular assignment:
+#+begin_src bash
+bundle install
+rails db:migrate db:seed
+#+end_src
+
+I also received a weird message including the following for the 'rails db:migrate db:seed' command regarding dependencies for 'nokogiri' and 'racc' as per this output:
+#+begin_src bash
+samuelbanya@Samuels-MBP ~/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme $ rails db:migrate db:seed
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring nokogiri-1.8.2 because its extensions are not built. Try: gem pristine nokogiri --version 1.8.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+Ignoring racc-1.5.2 because its extensions are not built. Try: gem pristine racc --version 1.5.2
+#+end_src
+
+I then proceeded to fix this issue by using the 'gem pristine nokogiri --version 1.8.2' and 'gem pristine racc --version 1.5.2' accordingly:
+#+begin_src bash
+samuelbanya@Samuels-MBP ~/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme $ gem pristine nokogiri --version 1.8.2
+Restoring gems to pristine condition...
+Building native extensions. This could take a while...
+GemWrappers: Can not wrap missing file: nokogiri
+Restored nokogiri-1.8.2
+
+samuelbanya@Samuels-MBP ~/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme $ gem pristine racc --version 1.5.2
+Restoring gems to pristine condition...
+Building native extensions. This could take a while...
+Restored racc-1.5.2
+#+end_src
+
+<2022-10-20 Thu 14:03>: I then realized after multiple attempts that the above action did not work to resolve the issue, so I looked in the 'prework' section and found this related update command accordingly:
+#+begin_src bash
+samuelbanya@Samuels-MBP ~/.gem/gems $ gem update --system
+Updating rubygems-update
+Fetching rubygems-update-3.3.24.gem
+Successfully installed rubygems-update-3.3.24
+Parsing documentation for rubygems-update-3.3.24
+Installing ri documentation for rubygems-update-3.3.24
+Done installing documentation for rubygems-update after 205 seconds
+Parsing documentation for rubygems-update-3.3.24
+Done installing documentation for rubygems-update after 0 seconds
+Installing RubyGems 3.3.24
+  Successfully built RubyGem
+  Name: bundler
+  Version: 2.3.24
+  File: bundler-2.3.24.gem
+Bundler 2.3.24 installed
+RubyGems 3.3.24 installed
+Regenerating binstubs
+Regenerating plugins
+Parsing documentation for rubygems-3.3.24
+Installing ri documentation for rubygems-3.3.24
+
+# 3.3.24 / 2022-10-17
+
+## Enhancements:
+
+* Installs bundler 2.3.24 as a default gem.
+
+# 3.3.23 / 2022-10-05
+
+## Enhancements:
+
+* Add better error handling for permanent redirect responses. Pull request
+  #5931 by jenshenny
+* Installs bundler 2.3.23 as a default gem.
+
+## Bug fixes:
+
+* Fix generic arm platform matching against runtime arm platforms with
+  eabi modifiers. Pull request #5957 by deivid-rodriguez
+* Fix `Gem::Platform.match` not handling String argument properly. Pull
+  request #5939 by flavorjones
+* Fix resolution on non-musl platforms. Pull request #5915 by
+  deivid-rodriguez
+* Mask the file mode when extracting files. Pull request #5906 by
+  kddnewton
+
+# 3.3.22 / 2022-09-07
+
+## Enhancements:
+
+* Support non gnu libc arm-linux-eabi platforms. Pull request #5889 by
+  ntkme
+* Installs bundler 2.3.22 as a default gem.
+
+## Bug fixes:
+
+* Fix `gem info` with explicit `--version`. Pull request #5884 by
+  tonyaraujop
+
+# 3.3.21 / 2022-08-24
+
+## Enhancements:
+
+* Support non gnu libc linux platforms. Pull request #5852 by
+  deivid-rodriguez
+* Installs bundler 2.3.21 as a default gem.
+
+# 3.3.20 / 2022-08-10
+
+## Enhancements:
+
+* Include backtrace with crashes by default. Pull request #5811 by
+  deivid-rodriguez
+* Don't create broken symlinks when a gem includes them, but print a
+  warning instead. Pull request #5801 by deivid-rodriguez
+* Warn (rather than crash) when setting `nil` specification versions. Pull
+  request #5794 by deivid-rodriguez
+* Installs bundler 2.3.20 as a default gem.
+
+## Bug fixes:
+
+* Always consider installed specs for resolution, even if prereleases.
+  Pull request #5821 by deivid-rodriguez
+* Fix `gem install` with `--platform` flag not matching simulated platform
+  correctly. Pull request #5820 by deivid-rodriguez
+* Fix platform matching for index specs. Pull request #5795 by Ilushkanama
+
+# 3.3.19 / 2022-07-27
+
+## Enhancements:
+
+* Display mfa warnings on `gem signin`. Pull request #5590 by aellispierce
+* Require fileutils more lazily when installing gems. Pull request #5738
+  by deivid-rodriguez
+* Fix upgrading RubyGems with a customized `Gem.default_dir`. Pull request
+  #5728 by deivid-rodriguez
+* Stop using `/dev/null` for silent ui for WASI platform. Pull request
+  #5703 by kateinoigakukun
+* Unify loading `Gem::Requirement`. Pull request #5596 by deivid-rodriguez
+* Installs bundler 2.3.19 as a default gem.
+
+## Bug fixes:
+
+* Fix `ruby setup.rb` with `--destdir` writing outside of `--destdir`.
+  Pull request #5737 by deivid-rodriguez
+
+## Documentation:
+
+* Fix wrong information about default RubyGems source. Pull request #5723
+  by tnir
+
+# 3.3.18 / 2022-07-14
+
+## Enhancements:
+
+* Make platform `universal-mingw32` match "x64-mingw-ucrt". Pull request
+  #5655 by johnnyshields
+* Add more descriptive messages when `gem update` fails to update some
+  gems. Pull request #5676 by brianleshopify
+* Installs bundler 2.3.18 as a default gem.
+
+## Bug fixes:
+
+* Make sure RubyGems prints no warnings when loading plugins. Pull request
+  #5607 by deivid-rodriguez
+
+# 3.3.17 / 2022-06-29
+
+## Enhancements:
+
+* Document `gem env` argument aliases and add `gem env user_gemhome` and
+  `gem env user_gemdir`. Pull request #5644 by deivid-rodriguez
+* Improve error message when `operating_system.rb` fails to load. Pull
+  request #5658 by deivid-rodriguez
+* Clean up temporary directory after `generate_index --update`. Pull
+  request #5653 by graywolf-at-work
+* Simplify extension builder. Pull request #5626 by deivid-rodriguez
+* Installs bundler 2.3.17 as a default gem.
+
+## Documentation:
+
+* Modify RubyGems issue template to be like the one for Bundler. Pull
+  request #5643 by deivid-rodriguez
+
+# 3.3.16 / 2022-06-15
+
+## Enhancements:
+
+* Auto-fix and warn gem packages including a gemspec with `require_paths`
+  as an array of arrays. Pull request #5615 by deivid-rodriguez
+* Misc cargo builder improvements. Pull request #5459 by ianks
+* Installs bundler 2.3.16 as a default gem.
+
+## Bug fixes:
+
+* Fix incorrect password redaction when there's an error in `gem source
+  -a`. Pull request #5623 by deivid-rodriguez
+* Fix another regression when loading old marshaled specs. Pull request
+  #5610 by deivid-rodriguez
+
+# 3.3.15 / 2022-06-01
+
+## Enhancements:
+
+* Support the change of did_you_mean about `Exception#detailed_message`.
+  Pull request #5560 by mame
+* Installs bundler 2.3.15 as a default gem.
+
+## Bug fixes:
+
+* Fix loading old marshaled specs including `YAML::PrivateType` constant.
+  Pull request #5415 by deivid-rodriguez
+* Fix rubygems update when non default `--install-dir` is configured. Pull
+  request #5566 by deivid-rodriguez
+
+# 3.3.14 / 2022-05-18
+
+## Enhancements:
+
+* Installs bundler 2.3.14 as a default gem.
+
+# 3.3.13 / 2022-05-04
+
+## Enhancements:
+
+* Installs bundler 2.3.13 as a default gem.
+
+## Bug fixes:
+
+* Fix regression when resolving ruby constraints. Pull request #5486 by
+  deivid-rodriguez
+
+## Documentation:
+
+* Clarify description of owner-flags. Pull request #5497 by kronn
+
+# 3.3.12 / 2022-04-20
+
+## Enhancements:
+
+* Less error swallowing when installing gems. Pull request #5475 by
+  deivid-rodriguez
+* Stop considering `RUBY_PATCHLEVEL` for resolution. Pull request #5472 by
+  deivid-rodriguez
+* Bump vendored optparse to latest master. Pull request #5466 by
+  deivid-rodriguez
+* Installs bundler 2.3.12 as a default gem.
+
+## Documentation:
+
+* Fix formatting in docs. Pull request #5470 by peterzhu2118
+* Fix a typo. Pull request #5401 by znz
+
+# 3.3.11 / 2022-04-07
+
+## Enhancements:
+
+* Enable mfa on specific keys during gem signin. Pull request #5305 by
+  aellispierce
+* Prefer `__dir__` to `__FILE__`. Pull request #5444 by deivid-rodriguez
+* Add cargo builder for rust extensions. Pull request #5175 by ianks
+* Installs bundler 2.3.11 as a default gem.
+
+## Documentation:
+
+* Improve RDoc setup. Pull request #5398 by deivid-rodriguez
+
+
+------------------------------------------------------------------------------
+
+RubyGems installed the following executables:
+        /Users/samuelbanya/.rvm/rubies/ruby-2.7.4/bin/gem
+        /Users/samuelbanya/.rvm/rubies/ruby-2.7.4/bin/bundle
+        /Users/samuelbanya/.rvm/rubies/ruby-2.7.4/bin/bundler
+
+Ruby Interactive (ri) documentation was installed. ri is kind of like man
+pages for Ruby libraries. You may access it like this:
+  ri Classname
+  ri Classname.class_method
+  ri Classname#instance_method
+If you do not wish to install this documentation in the future, use the
+--no-document flag, or set it as the default in your ~/.gemrc file. See
+'gem help env' for details.
+
+RubyGems system software updated
+#+end_src
+
+<2022-10-20 Thu 15:02>: Notes On Routing For Ruby On Rails Applications:
+- A client sends a request to the server (this could be: a user entering a URL in a browser; a JavaScript application using fetch; etc)
+- That request is sent to the server where the application's router interprets the request and sends a message to the controller mapped to that route
+- The controller uses the model to access data from the database
+- The controller then uses that data to render a view (HTML or JSON)
+- The server returns an HTTP response, which contains the HTML or JSON data
+
+<2022-10-20 Thu 15:02>: I then started up the server with the following 'rails s' command:
+#+begin_src bash
+samuelbanya@Samuels-MBP ~/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme $ rails s
+=> Booting Puma
+=> Rails 6.1.7 application starting in development
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 5.6.5 (ruby 2.7.4-p191) ("Birdie's Version")
+*  Min threads: 5
+*  Max threads: 5
+*  Environment: development
+*          PID: 9581
+* Listening on http://127.0.0.1:3000
+* Listening on http://[::1]:3000
+Use Ctrl-C to stop
+#+end_src
+
+I then navigated to the 'http://127.0.0.1:3000/cheeses' route and received the following message:
+#+begin_src text
+Routing Error
+No route matches [GET] "/cheeses"
+#+end_src
+
+I then added a route to 'config/routes.rb' with the following information:
+#+begin_src ruby
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get "cheeses", to: "cheeses#index"
+end
+#+end_src
+
+This basically means the following:
+- HTTP verb: ex --> 'get' HTTP verb
+- Path: 'cheeses' route, which represents the path in the URL bar that the route will be mapped to.
+- Controller Action: 'cheeses#index' --> this tells the Rails routing system that this route should be passed through the CheesesController's index action.
+- NOTE: This just means an instance method in a controller.
+- Ex: In the CheesesController will be a method called index that gets called when a user goes to /cheeses.
+
+With this revision above, the error then turned to the following:
+#+begin_src text
+Routing Error
+uninitialized constant CheesesController
+#+end_src
+
+I then generated a related controller with the following 'rails g controller' command while keeping in mind that the 'controller' needs to be plural, while the corresponding model will be 'singular':
+#+begin_src bash
+samuelbanya@Samuels-MBP ~/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme $ rails g controller Cheeses --no-test-framework
+      create  app/controllers/cheeses_controller.rb
+#+end_src
+
+I then edited the corresponding controller file, '/app/controllers/cheeses_controller.rb', with the following contents:
+#+begin_src ruby
+class CheesesController < ApplicationController
+end
+#+end_src
+
+I then attempted to access the '/cheeses' route with the 'http://localhost:3000/cheeses' URL, and received the following error:
+#+begin_src text
+Unknown action
+The action 'index' could not be found for CheesesController
+#+end_src
+
+I then edited the related controller file, '/app/controllers/cheeses_controller.rb' with the following contents to utilize the 'byebug' Ruby gem library to do more debugging within the related terminal that had my existing Rails server running:
+#+begin_src ruby
+class CheesesController < ApplicationController
+    def index
+        byebug
+    end
+end
+#+end_src
+
+I then visited the 'http://localhost:3000/cheeses' URL accordingly, and then utilized the resulting 'byebug' session accordingly within the existing rails server terminal:
+#+begin_src bash
+[1, 5] in /Users/samuelbanya/hub/Development/code/phase-4/phase-4-rails-routing-basics-readme/app/controllers/cheeses_controller.rb
+   1: class CheesesController < ApplicationController
+   2:     def index
+   3:         byebug
+=> 4:     end
+   5: end
+(byebug) cheeses = Cheese.all()
+   (0.1ms)  SELECT sqlite_version(*)
+  ↳ app/controllers/cheeses_controller.rb:4:in `index'
+  Cheese Load (0.7ms)  SELECT "cheeses".* FROM "cheeses" /* loading for inspect */ LIMIT ?  [["LIMIT", 11]]
+  ↳ app/controllers/cheeses_controller.rb:4:in `index'
+#<ActiveRecord::Relation [#<Cheese id: 1, name: "Cheddar", price: 3, is_best_seller: true, created_at: "2022-10-20 18:47:00.032894000 +0000", updated_at: "2022-10-20 18:47:00.032894000 +0000">, #<Cheese id: 2, name: "Pepper Jack", price: 4, is_best_seller: true, created_at: "2022-10-20 18:47:00.037399000 +0000", updated_at: "2022-10-20 18:47:00.037399000 +0000">, #<Cheese id: 3, name: "Limburger", price: 8, is_best_seller: false, created_at: "2022-10-20 18:47:00.042191000 +0000", updated_at: "2022-10-20 18:47:00.042191000 +0000">]>
+(byebug) render json: cheeses
+  Cheese Load (0.3ms)  SELECT "cheeses".* FROM "cheeses"
+  ↳ (byebug):1:in `index'
+"[{\"id\":1,\"name\":\"Cheddar\",\"price\":3,\"is_best_seller\":true,\"created_at\":\"2022-10-20T18:47:00.032Z\",\"updated_at\":\"2022-10-20T18:47:00.032Z\"},{\"id\":2,\"name\":\"Pepper Jack\",\"price\":4,\"is_best_seller\":true,\"created_at\":\"2022-10-20T18:47:00.037Z\",\"updated_at\":\"2022-10-20T18:47:00.037Z\"},{\"id\":3,\"name\":\"Limburger\",\"price\":8,\"is_best_seller\":false,\"created_at\":\"2022-10-20T18:47:00.042Z\",\"updated_at\":\"2022-10-20T18:47:00.042Z\"}]"
+#+end_src
+
+As seen above, by using the 'render' method with the 'json:' option, the JSON response will be sent back which the controller can then use as the body of the response being sent back to the client.
+
+After seeing this done on a live session, I implemented the JSON response in the '/app/controllers/cheeses_controller.rb' controller file accordingly:
+#+begin_src ruby
+class CheesesController < ApplicationController
+    def index
+        cheeses = Cheese.all()
+        render json: cheeses
+    end
+end
+#+end_src
+
+I then visited the 'http://localhost:3000/cheeses' URL in a browser, and was provided the following JSON response:
+#+begin_src json
+// 20221020151936
+// http://localhost:3000/cheeses
+
+[
+  {
+    "id": 1,
+    "name": "Cheddar",
+    "price": 3,
+    "is_best_seller": true,
+    "created_at": "2022-10-20T18:47:00.032Z",
+    "updated_at": "2022-10-20T18:47:00.032Z"
+  },
+  {
+    "id": 2,
+    "name": "Pepper Jack",
+    "price": 4,
+    "is_best_seller": true,
+    "created_at": "2022-10-20T18:47:00.037Z",
+    "updated_at": "2022-10-20T18:47:00.037Z"
+  },
+  {
+    "id": 3,
+    "name": "Limburger",
+    "price": 8,
+    "is_best_seller": false,
+    "created_at": "2022-10-20T18:47:00.042Z",
+    "updated_at": "2022-10-20T18:47:00.042Z"
+  }
+]
+#+end_src
+
+Three components of a route in Rails includes:
+- HTTP verb
+- Route
+- Method
